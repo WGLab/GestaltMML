@@ -1,1 +1,1 @@
-# GestaltMML-GestaltGPT
+# GestaltMML
