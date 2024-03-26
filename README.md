@@ -12,6 +12,7 @@ We need to first install the following required packages for model training and 
 ## Training
 Once the package has been installed and access to the GMDB has been granted, the following [notebook](https://github.com/WGLab/GestaltMML/blob/main/GestaltMML_v1.0.9.ipynb) can be executed to train the GestaltMML model. Please be aware that it is necessary to download the hp.json (HPO dictionary) from [https://hpo.jax.org/app/data/ontology](https://hpo.jax.org/app/data/ontology), and the omim_summarized_1.0.9.json (summarized OMIM texts for data augmentation) is available for public access in this GitHub repository. The model weights will be made available upon request to those who have gained access to GMDB. Additionally, the notebook can be modified to conduct your own experiments.
 
+Please be aware that the current version of GestaltMML has been developed using GMDB (v1.0.9). The training script is designed for easy adaptation to subsequent versions of the GMDB.
 
 ## Inference
 After completing the training process, proceed to the "Inference" section of the script to carry out inference. It is strongly advised to adhere to the guidelines provided [here](https://github.com/igsb/GestaltMatcher-Arc/tree/service?tab=readme-ov-file#crop-and-align-faces) or cropping and aligning frontal facial images prior to conducting the inference.
