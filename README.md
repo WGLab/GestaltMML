@@ -1,7 +1,7 @@
 # GestaltMML
 The GestaltMML is a cutting-edge multimodal machine learning model integrating frontal facial images, demographic information of patients and clinical text data for the diagnosis of rare genetic disorders. It leverages the power of fine-tuning the Vision-and-Language Transformer (ViLT) (see [ViLT: Vision-and-Language Transformer Without Convolution or Region Supervision](https://arxiv.org/abs/2102.03334)) using data from the [GestaltMatcher Database (GMDB)](https://db.gestaltmatcher.org). To gain access to the GMDB, interested individuals need to submit an application [here](https://db.gestaltmatcher.org/documents).
 
-GestaltMML is distributed under [MIT License by Wang Genmoics Lab](https://github.com/WGLab/GestaltMML/blob/main/LICENSE).
+GestaltMML is distributed under [MIT License by Wang Genmoics Lab](https://wglab.mit-license.org).
 
 ## Package Installation
 We need to first install the following required packages for model training and inference.
