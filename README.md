@@ -15,4 +15,4 @@ Once the package has been installed and access to the GMDB has been granted, the
 Please be aware that the current version of GestaltMML has been developed using GMDB (v1.0.9). The training script is designed for easy adaptation to subsequent versions of the GMDB.
 
 ## Inference
-After completing the training process, proceed to the "Inference" section of the script to carry out inference. It is strongly advised to adhere to the guidelines provided [here](https://github.com/igsb/GestaltMatcher-Arc/tree/service?tab=readme-ov-file#crop-and-align-faces) or cropping and aligning frontal facial images prior to conducting the inference.
+After completing the training process, proceed to the "Inference" section of the script to carry out inference. It is strongly advised to adhere to the guidelines provided [here](https://github.com/igsb/GestaltMatcher-Arc/tree/service?tab=readme-ov-file#crop-and-align-faces) for cropping and aligning frontal facial images prior to conducting the inference.
