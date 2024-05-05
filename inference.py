@@ -3,9 +3,13 @@ import pandas as pd
 import torch
 import json
 from transformers import ViltProcessor, ViltForQuestionAnswering
+from PIL import Image
 
 def load_model(model_path, device):
-    model = ViltForQuestionAnswering.from_pretrained("dandelin/vilt-b32-mlm", num_labels=528)
+    num_list = [int(i) for i in range(528)]
+    label2id = dict(zip(num_list,num_list))
+    id2label = dict(zip(num_list,num_list))
+    model = ViltForQuestionAnswering.from_pretrained("dandelin/vilt-b32-mlm", num_labels=528,id2label=id2label,label2id=label2id)
     if device == "cpu":
         model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     else:
@@ -22,14 +26,53 @@ def prepare_data(csv_file, base_image_path):
     data = pd.read_csv(csv_file)
     data['filename'] = data['filename'].apply(lambda x: f"{base_image_path}/{x}")
     data['label'] = 0  #label is not important for inference
-    return data
-
-def run_inference(model, data, device, disease_dict, top_n):
+    test_questions = []
+    for i in range(len(data)):
+        temp_dic = {'image_id':data.loc[i,'image_id'],'question':data.loc[i,'texts']}
+        test_questions.append(temp_dic)
+    test_annotations = []
+    for i in range(len(data)):
+        temp_dic = {'labels':[0],'scores':[1]}
+        test_annotations.append(temp_dic)
+    filename_to_id = {data.loc[i,'filename']: data.loc[i,'image_id'] for i in range(len(data))}
+    id_to_filename = {v:k for k,v in filename_to_id.items()}
     processor = ViltProcessor.from_pretrained("dandelin/vilt-b32-mlm")
+    num_list = [int(i) for i in range(528)]
+    label2id = dict(zip(num_list,num_list))
+    id2label = dict(zip(num_list,num_list))
+    class VQADataset(torch.utils.data.Dataset):
+        def __init__(self, questions, annotations, processor):
+            self.questions = questions
+            self.annotations = annotations
+            self.processor = processor
+        def __len__(self):
+            return len(self.annotations)
+        def __getitem__(self, idx):
+            annotation = self.annotations[idx]
+            questions = self.questions[idx]
+            image = Image.open(id_to_filename[questions['image_id']])
+            text = questions['question']
+            encoding = self.processor(image, text, padding="max_length", truncation=True, return_tensors="pt")
+            for k,v in encoding.items():
+                encoding[k] = v.squeeze()
+            labels = annotation['labels']
+            scores = annotation['scores']
+            targets = torch.zeros(len(id2label))
+            for label, score in zip(labels, scores):
+                targets[label] = score
+            encoding["labels"] = targets
+            return encoding
+    test_dataset = VQADataset(questions = test_questions,
+                     annotations = test_annotations,
+                     processor=processor)
+    return test_dataset
+
+def run_inference(model, test_dataset, device, disease_dict, top_n):
     predicted_diseases = []
-    for index, row in data.iterrows():
-        test_dataset = processor(row['filename'], row['texts'], return_tensors="pt").to(device)
-        outputs = model(**test_dataset)
+    for i in range(len(test_dataset)):
+        example = test_dataset[i]
+        example = {k: v.unsqueeze(0).to(device) for k,v in example.items()}
+        outputs = model(**example)
         logits = outputs.logits
         if top_n == 1:
             predicted_classes = [logits.argmax(-1).item()]
