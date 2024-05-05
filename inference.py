@@ -93,10 +93,10 @@ def main(args):
         print(f"Data {i + 1}: Top-{args.top_n} predicted diseases: {pred}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Run inference on GestaltMML for diagnosing genetic diseases.')
-    parser.add_argument('--csv_file', type=str, required=True, help='Path to the input CSV file with image file names and corresponding texts')
-    parser.add_argument('--base_image_path', type=str, required=True, help='Base path to the folder of image files')
-    parser.add_argument('--model_path', type=str, required=True, help='Path to the pretrained model file')
+    parser = argparse.ArgumentParser(description='Run inference on GestaltMML for diagnosing rare genetic diseases.')
+    parser.add_argument('--csv_file', type=str, required=True, help='Path to the input CSV file with image ids, image file names and corresponding texts')
+    parser.add_argument('--base_image_path', type=str, required=True, help='Base path to the folder of images')
+    parser.add_argument('--model_path', type=str, required=True, help='Path to the GestaltMML model weights')
     parser.add_argument('--disease_dict_path', type=str, required=True, help='Path to the disease dictionary JSON file')
     parser.add_argument('--top_n', type=int, default=1, help='Number of top predicted diseases to return')
     args = parser.parse_args()
