@@ -18,7 +18,7 @@ Once the package has been installed and access to the GMDB has been granted, the
 
 ## Inference
 For inference using GestaltMML, please see the notebook [GestaltMML_Inference.ipynb](https://github.com/WGLab/GestaltMML/blob/main/GestaltMML_Inference.ipynb) for detailed instruction. 
-If you want to simply load GestaltMML on your local machine for inference, the fine-tuned models are saved in Please use the following command:
+If you want to simply load GestaltMML on your local machine for inference, the model weights GestaltMML_model.pt are saved in . In addition, disease_dict.json, three sample test images and sample texts (in GestaltMML_input.csv) are provided in the folder [inference](inference) in this Github page. Please use the following command:
 ```
 python inference.py --csv_file path/to/input.csv --base_image_path path/to/images --model_path path/to/GestaltMML_model.pt --disease_dict_path path/to/disease_dict.json --top_n 5
 ```
