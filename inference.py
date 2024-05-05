@@ -18,8 +18,8 @@ def load_model(model_path, device):
     return model
 
 def load_disease_dict(dictionary_path):
-    with open(dictionary_path, 'r') as file:
-        disease_dict = json.load(file)
+    with open(dictionary_path) as json_file:
+        disease_dict = json.load(json_file)
     return disease_dict
 
 def prepare_data(csv_file, base_image_path):
@@ -95,7 +95,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run inference on GestaltMML for diagnosing genetic diseases.')
     parser.add_argument('--csv_file', type=str, required=True, help='Path to the input CSV file with image file names and corresponding texts')
-    parser.add_argument('--base_image_path', type=str, required=True, help='Base path to the image files')
+    parser.add_argument('--base_image_path', type=str, required=True, help='Base path to the folder of image files')
     parser.add_argument('--model_path', type=str, required=True, help='Path to the pretrained model file')
     parser.add_argument('--disease_dict_path', type=str, required=True, help='Path to the disease dictionary JSON file')
     parser.add_argument('--top_n', type=int, default=1, help='Number of top predicted diseases to return')
