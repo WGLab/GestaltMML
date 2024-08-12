@@ -4,7 +4,7 @@ The GestaltMML is a cutting-edge multimodal machine learning model integrating f
 GestaltMML is distributed under [MIT License by Wang Genmoics Lab](https://wglab.mit-license.org).
 
 ## Package Installation
-We need to first install the following required packages for model training and inference (5-10mins typically).
+We need to first install the following required packages (5-10 mins typically) for model training and inference.
 ```
 conda create -n gestaltmml python=3.11
 conda activate gestaltmml
