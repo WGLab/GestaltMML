@@ -23,6 +23,6 @@ If you want to simply load GestaltMML on your local machine for inference, the m
 ```
 python inference.py --csv_file path/to/GestaltMML_input.csv --base_image_path path/to/test_images --model_path path/to/GestaltMML_model.pt --disease_dict_path path/to/disease_dict.json --top_n 5
 ```
-It is strongly advised to adhere to the guidelines provided [here](https://github.com/igsb/GestaltMatcher-Arc/tree/service?tab=readme-ov-file#crop-and-align-faces) for cropping and aligning frontal facial images prior to conducting the inference. The typical running time for inference script (inference.py) is 2-3 mins with cuda available.
+It is strongly advised to adhere to the guidelines provided [here](https://github.com/igsb/GestaltMatcher-Arc/tree/service?tab=readme-ov-file#crop-and-align-faces) for cropping and aligning frontal facial images prior to conducting the inference. The typical running time for inference script (inference.py) is <1 mins with CPU.
 ## Citation
 Wu, D., Yang, J., Liu, C., Hsieh, T.C., Marchi, E., Krawitz, P., Weng, C., Chung, W., Lyon, G.J., Krantz, I.D., Kalish, J.M. and Wang, K., 2024. GestaltMML: Enhancing Rare Genetic Disease Diagnosis through Multimodal Machine Learning Combining Facial Images and Clinical Texts. arXiv preprint [arXiv:2312.15320](https://arxiv.org/abs/2312.15320).
