@@ -10,6 +10,7 @@ conda create -n gestaltmml python=3.11
 conda activate gestaltmml
 conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=11.8 -c pytorch -c nvidia
 pip install transformers dataset
+pip install pandas
 conda install -c anaconda ipykernel
 python -m ipykernel install --user --name=gestaltmml
 ```
